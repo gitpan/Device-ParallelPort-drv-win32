@@ -49,7 +49,8 @@ L<Device::ParallelPort>
 use Win32::API;
 # NOTE - Have not considered pre Perl 5.6 support - may need to
 use base qw/Device::ParallelPort::drv/;
-our $VERSION = '1.0';
+use vars qw/$VERSION/;
+$VERSION = '1.2';
 
 # Standard function to return information from this driver
 sub INFO {
@@ -80,13 +81,13 @@ sub init {
 sub set_byte {
 	my ($this, $byte, $val) = @_;
 	croak "Invalid byte" unless ($byte >=0 && $byte <= 2);
-	$this->{DATA}{SET}->Call($this->{DATA}{BASE} + $byte, $val);
+	$this->{DATA}{SET}->Call($this->{DATA}{BASE} + $byte, ord($val));
 }
 
 sub get_byte {
 	my ($this, $byte, $val) = @_;
 	croak "Invalid byte" unless ($byte >=0 && $byte <= 2);
-	return $this->{DATA}{GET}->Call($this->{DATA}{BASE} + $byte);
+	return chr($this->{DATA}{GET}->Call($this->{DATA}{BASE} + $byte));
 }
 
 1;
