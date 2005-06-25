@@ -50,7 +50,7 @@ use Win32::API;
 # NOTE - Have not considered pre Perl 5.6 support - may need to
 use base qw/Device::ParallelPort::drv/;
 use vars qw/$VERSION/;
-$VERSION = '1.2';
+$VERSION = '1.3';
 
 # Standard function to return information from this driver
 sub INFO {
